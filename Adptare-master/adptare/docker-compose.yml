@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  back-adaptare:
+    build: .
+    ports:
+      - "8081:8081"
+    environment:
+      - JWT_SECRET=ultra-secret-k3Y
+    networks:
+      - adptare
+networks:
+  adptare:
+    external: true
