@@ -57,3 +57,4 @@ Certifique-se de ter o Maven, Docker e Docker Compose instalados em sua máquina
 - Certifique-se de revisar e ajustar as configurações de segurança e acesso conforme necessário para o seu ambiente específico.
 - Certifique-se de que o contêiner do back-end esteja na mesma rede Docker que os contêineres do front-end e do banco de dados para permitir a comunicação adequada entre eles.
 - Esta aplicação é desenvolvida em Java com Spring Boot, incluindo Spring Security para controle de acesso e autenticação.
+- Certifique-se de que o contêiner do back-end esteja na mesma rede Docker que os contêineres do front-end e do banco de dados para permitir a comunicação adequada entre eles. O back-end depende do contêiner do banco de dados para funcionar corretamente.
