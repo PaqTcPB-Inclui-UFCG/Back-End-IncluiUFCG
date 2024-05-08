@@ -11,13 +11,13 @@ Certifique-se de ter o Maven, Docker e Docker Compose instalados em sua máquina
 1. **Clone este repositório:**
    
    ```bash
-   git clone https://github.com/Adptare/Back-Adptare.git
+   git clone https://github.com/IncluiUFCG/Back-End-IncluiUFCG.git
    ```
 
 2. **Navegue até o diretório do projeto:**
    
    ```bash
-   cd Back-Adptare/Adptare-master/adptare/
+   cd Back-End-IncluiUFCG/Adptare-master/adptare/
    ```
 
 3. **Construa o pacote JAR do back-end usando o Maven:**
