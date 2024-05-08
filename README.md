@@ -1,4 +1,4 @@
-# Guia de Uso: Docker Compose para Back-end da Aplicação Adptare
+# Guia de Uso IncluiUFCG: Docker Compose para Back-end da Aplicação Adptare
 
 Este guia fornecerá instruções passo a passo para construir e executar o contêiner Docker para o back-end da aplicação Adptare usando Docker Compose.
 
