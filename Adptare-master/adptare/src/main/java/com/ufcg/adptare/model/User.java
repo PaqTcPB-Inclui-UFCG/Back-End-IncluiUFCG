@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
-
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Table(name = "users")
@@ -28,6 +28,7 @@ public class User implements UserDetails {
     private String lastName;
     private String fullName;
     private byte[] photo;
+    private ArrayList<Article> articles;
 
     public User(String login, String encryptePassword, UserRole userRole, String firstName, String lastName) {
         this.login = login;
@@ -36,14 +37,16 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = firstName + " " + lastName;
+        this.articles = new ArrayList<Article>();
 
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("NEW_USER"));
-        else return List.of(new SimpleGrantedAuthority("NEW_USER"));
+        if (this.role == UserRole.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("NEW_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("NEW_USER"));
     }
 
     @Override
@@ -69,5 +72,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    // favorita um artigo
+    public void favoriteArticle(Article article) {
+        articles.add(article);
     }
 }
