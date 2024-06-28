@@ -22,43 +22,46 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
-    @Column(name="content")
+    @Column(name = "content")
     private String content;
+
+    // Quantidade de "likes" no artigo
+    @Column(name = "favorites")
+    private Integer favorites;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.EAGER)
     private List<Attachment> attachments = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "article_tags",
-            joinColumns = @JoinColumn(name = "article_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
+    @JoinTable(name = "article_tags", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags = new ArrayList<>();
 
     @CreationTimestamp
-    @Column(name="created_date")
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
     @UpdateTimestamp
-    @Column(name="date_modified")
+    @Column(name = "date_modified")
     private LocalDateTime dateModified;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User autor;
 
-
-    @Column(name="external_references")
+    @Column(name = "external_references")
     private String externalReferences;
 
-    @Column(name="image_description")
+    @Column(name = "image_description")
     private String imageDescription;
 
     @Basic(fetch = FetchType.LAZY)
-    @Column(name="image")
+    @Column(name = "image")
     private byte[] image;
+
+    public void adicionaLike() {
+        this.favorites += 1;
+    }
 
 }
