@@ -10,6 +10,8 @@ import com.ufcg.adptare.model.Tag;
 import com.ufcg.adptare.repository.ArticleRepository;
 import com.ufcg.adptare.repository.TagRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,7 @@ public class ArticleService {
                 .map(this::convertToArticleDTO)
                 .collect(Collectors.toList());
     }
+
     public Optional<ArticleSimpleDTO> getArticleDTOById(String id) {
         return articleRepository.findById(id)
                 .map(this::convertToArticleDTO);
@@ -55,6 +58,7 @@ public class ArticleService {
                 article.getImageDescription(),
                 article.getCreatedDate(),
                 article.getId()
+
         );
     }
 
@@ -84,6 +88,18 @@ public class ArticleService {
 
     }
 
+    // curtir um artigo
+    public void likeArticle(String id) {
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            articleRepository.save(article);
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + id);
+        }
+
+    }
+
     public void deleteArticle(String id) {
         articleRepository.deleteById(id);
     }
@@ -103,8 +119,7 @@ public class ArticleService {
                 attachment.getId(),
                 attachment.getNameFile(),
                 attachment.getTypeFile(),
-                attachment.getContent()
-        );
+                attachment.getContent());
     }
 
     public Article updateArticle(String articleId, ArticleDTO articleDTO) {

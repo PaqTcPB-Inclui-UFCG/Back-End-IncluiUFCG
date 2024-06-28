@@ -60,8 +60,4 @@ public class Article {
     @Column(name = "image")
     private byte[] image;
 
-    public void adicionaLike() {
-        this.favorites += 1;
-    }
-
 }

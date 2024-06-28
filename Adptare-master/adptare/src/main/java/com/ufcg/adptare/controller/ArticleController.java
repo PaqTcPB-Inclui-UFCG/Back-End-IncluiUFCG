@@ -3,9 +3,14 @@ package com.ufcg.adptare.controller;
 import com.ufcg.adptare.dto.article.ArticleSimpleDTO;
 import com.ufcg.adptare.dto.attachment.AttachmentSimpleDTO;
 import com.ufcg.adptare.service.ArticleService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.dto.article.ArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,6 +71,17 @@ public class ArticleController {
     public ResponseEntity<Set<String>> getAllUniqueTags() {
         Set<String> uniqueTags = articleService.getAllUniqueTags();
         return ResponseEntity.ok(uniqueTags);
+    }
+
+    // atualizacoes
+    @PutMapping("/{articleId}/like")
+    public ResponseEntity<?> likeArticle(@PathVariable String id) {
+        try {
+            articleService.likeArticle(id);
+            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }
