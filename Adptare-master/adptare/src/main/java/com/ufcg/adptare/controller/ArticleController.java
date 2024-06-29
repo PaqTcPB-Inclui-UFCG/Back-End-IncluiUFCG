@@ -74,7 +74,7 @@ public class ArticleController {
     }
 
     // atualizacoes
-    @PutMapping("/{articleId}/like")
+    @PutMapping("/{idArticle}/like")
     public ResponseEntity<?> likeArticle(@PathVariable String id) {
         try {
             articleService.likeArticle(id);
