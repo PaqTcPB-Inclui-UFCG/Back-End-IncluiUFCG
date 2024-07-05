@@ -72,6 +72,7 @@ public class ArticleService {
             throw new RuntimeException("Autor não encontrado com ID: " + articleDTO.autorId());
         }
         Article article = new Article();
+        article.setFavorites(0);
         article.setTitle(articleDTO.titulo());
         article.setAutor(autor);
         article.setImage(articleDTO.file());
@@ -93,6 +94,7 @@ public class ArticleService {
         Optional<Article> optionalArticle = articleRepository.findById(id);
         if (optionalArticle.isPresent()) {
             Article article = optionalArticle.get();
+            article.setFavorites(article.getFavorites() + 1);
             articleRepository.save(article);
         } else {
             throw new EntityNotFoundException("Article not found with id " + id);
