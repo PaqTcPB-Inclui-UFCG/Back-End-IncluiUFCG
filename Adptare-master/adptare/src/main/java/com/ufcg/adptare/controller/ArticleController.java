@@ -10,7 +10,6 @@ import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.dto.article.ArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,7 +72,7 @@ public class ArticleController {
         return ResponseEntity.ok(uniqueTags);
     }
 
-    // atualizacoes
+    // Curtir Artigo
     @PutMapping("/{idArticle}/like")
     public ResponseEntity<?> likeArticle(@PathVariable String id) {
         try {
