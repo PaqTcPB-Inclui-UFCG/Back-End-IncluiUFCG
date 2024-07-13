@@ -74,9 +74,9 @@ public class ArticleController {
 
     // Curtir Artigo
     @PutMapping("/{idArticle}/like")
-    public ResponseEntity<?> likeArticle(@PathVariable String id) {
+    public ResponseEntity<?> likeArticle(@PathVariable String idArticle) {
         try {
-            articleService.likeArticle(id);
+            articleService.likeArticle(idArticle);
             return ResponseEntity.ok(new String[] { "Article liked successfully!" });
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
