@@ -28,6 +28,9 @@ public class User implements UserDetails {
     private String lastName;
     private String fullName;
     private byte[] photo;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
     private ArrayList<Article> articles;
 
     public User(String login, String encryptePassword, UserRole userRole, String firstName, String lastName) {
@@ -76,6 +79,9 @@ public class User implements UserDetails {
 
     // favorita um artigo
     public void favoriteArticle(Article article) {
-        articles.add(article);
+        if(!articles.contains(article)){
+            articles.add(article);
+            article.setFavorites(article.getFavorites() + 1);
+        }
     }
 }

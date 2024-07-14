@@ -6,7 +6,10 @@ import com.ufcg.adptare.dto.user.UserPatchDTO;
 import com.ufcg.adptare.dto.user.UserSimpleDTO;
 import com.ufcg.adptare.exception.UserException;
 import com.ufcg.adptare.model.User;
+import com.ufcg.adptare.service.ArticleService;
 import com.ufcg.adptare.service.UserService;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    private ArticleService articleService;
 
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
@@ -120,6 +125,17 @@ public class UserController {
             return ResponseEntity.ok().body(photo);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+     // Curtir Artigo
+    @PutMapping("{userId}/{idArticle}/like")
+    public ResponseEntity<?> likeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+        try {
+            articleService.likeArticle(idArticle,userId);
+            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

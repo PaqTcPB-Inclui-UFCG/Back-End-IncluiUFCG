@@ -43,6 +43,8 @@ public class SecurityConfiguration {
                         // novos metodos
                         .requestMatchers(HttpMethod.PUT, "/api/articles/{idArticle}").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/articles/{idArticle}/like").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/users/{userId}/{idArticle}").authenticated()
+                        .requestMatchers(HttpMethod.PUT,"/users/{userId}/{idArticle}/like").permitAll()
                         // novos metodos
 
                         .requestMatchers(HttpMethod.GET, "/api/articles/search").permitAll()

@@ -90,14 +90,15 @@ public class ArticleService {
     }
 
     // curtir um artigo
-    public void likeArticle(String id) {
-        Optional<Article> optionalArticle = articleRepository.findById(id);
-        if (optionalArticle.isPresent()) {
+    public void likeArticle(String idArticle,String idUser) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null ) {
             Article article = optionalArticle.get();
-            article.setFavorites(article.getFavorites() + 1);
+            User user = userService.getUserById(idUser);
+            user.favoriteArticle(article);
             articleRepository.save(article);
         } else {
-            throw new EntityNotFoundException("Article not found with id " + id);
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
         }
 
     }

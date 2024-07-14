@@ -72,15 +72,6 @@ public class ArticleController {
         return ResponseEntity.ok(uniqueTags);
     }
 
-    // Curtir Artigo
-    @PutMapping("/{idArticle}/like")
-    public ResponseEntity<?> likeArticle(@PathVariable String idArticle) {
-        try {
-            articleService.likeArticle(idArticle);
-            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
-    }
+   
 
 }
