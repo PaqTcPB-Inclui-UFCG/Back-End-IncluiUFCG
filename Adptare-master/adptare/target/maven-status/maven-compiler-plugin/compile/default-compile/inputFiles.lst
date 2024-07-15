@@ -1,38 +1,38 @@
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityConfiguration.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Attachment.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\article\ArticleDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\ChangePasswordDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserPatchDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\AdptareApplication.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\config\SwaggerConfig.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\auth\AuthenticationDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\PostRepository.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserPhotoDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\ArticleRepository.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Tag.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\LoginDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\CorsConfig.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\ArticleService.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\AttachmentService.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\TagRepository.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\AttachmentController.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\attachment\AttachmentDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\AttachmentRepository.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\PostController.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\attachment\AttachmentSimpleDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\ArticleController.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserSimpleDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\auth\RegisterDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityFilter.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\AuthenticationController.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityService.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\UserService.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\UserRepository.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\User.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Article.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Post.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Enum\UserRole.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\AuthorizationService.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\article\ArticleSimpleDTO.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\UserController.java
-D:\Projetos React\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\exception\UserException.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserPatchDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\exception\UserException.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\AdptareApplication.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\ArticleController.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\attachment\AttachmentSimpleDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityConfiguration.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserPhotoDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\ArticleService.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\AttachmentController.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\AttachmentRepository.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Tag.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityService.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Article.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\AuthorizationService.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\LoginDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\AuthenticationController.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Enum\UserRole.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\ChangePasswordDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\PostRepository.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\TagRepository.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\auth\AuthenticationDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Attachment.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\ArticleRepository.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\user\UserSimpleDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\PostController.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\Post.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\controller\UserController.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\attachment\AttachmentDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\UserService.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\repository\UserRepository.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\service\AttachmentService.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\article\ArticleDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\CorsConfig.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\article\ArticleSimpleDTO.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\config\SwaggerConfig.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\infra\security\SecurityFilter.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\model\User.java
+E:\Work\Projetos\Aline - Projeto IncluiUFCG\Back-End-IncluiUFCG\Adptare-master\adptare\src\main\java\com\ufcg\adptare\dto\auth\RegisterDTO.java

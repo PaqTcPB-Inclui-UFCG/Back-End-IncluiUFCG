@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,8 +31,8 @@ public class User implements UserDetails {
     private byte[] photo;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
-    private ArrayList<Article> articles;
+    @JoinTable(name = "favorites_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
+    private List<Article> articles;
 
     public User(String login, String encryptePassword, UserRole userRole, String firstName, String lastName) {
         this.login = login;
@@ -40,7 +41,7 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = firstName + " " + lastName;
-        this.articles = new ArrayList<Article>();
+        this.articles = new ArrayList<>();
 
     }
 

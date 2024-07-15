@@ -27,6 +27,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
     private ArticleService articleService;
 
     @GetMapping
@@ -132,6 +133,7 @@ public class UserController {
     @PutMapping("{userId}/{idArticle}/like")
     public ResponseEntity<?> likeArticle(@PathVariable String idArticle, @PathVariable String userId) {
         try {
+            
             articleService.likeArticle(idArticle,userId);
             return ResponseEntity.ok(new String[] { "Article liked successfully!" });
         } catch (EntityNotFoundException e) {
