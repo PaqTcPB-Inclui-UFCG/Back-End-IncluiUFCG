@@ -90,9 +90,9 @@ public class ArticleService {
     }
 
     // curtir um artigo
-    public void likeArticle(String idArticle,String idUser) {
+    public void likeArticle(String idArticle, String idUser) {
         Optional<Article> optionalArticle = articleRepository.findById(idArticle);
-        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null ) {
+        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null) {
             Article article = optionalArticle.get();
             User user = userService.getUserById(idUser);
             user.favoriteArticle(article);

@@ -4,6 +4,7 @@ import com.ufcg.adptare.dto.user.UserPatchDTO;
 import com.ufcg.adptare.dto.user.UserPhotoDTO;
 import com.ufcg.adptare.dto.user.UserSimpleDTO;
 import com.ufcg.adptare.exception.UserException;
+import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.model.User;
 import com.ufcg.adptare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class UserService {
 
     public UserDetails getUserByEmail(String email) {
         return this.userRepository.findByLogin(email);
-     }
+    }
 
     private User applyPatch(User user, UserPatchDTO userPatchDTO) {
         if (userPatchDTO.firstName() != null) {
@@ -119,7 +120,7 @@ public class UserService {
     }
 
     private void validateLength(String password) {
-        if ( password.length() < 8) {
+        if (password.length() < 8) {
             throw UserException.invalidPassword("A senha deve ter no mínimo 8 caracteres");
         }
     }
@@ -159,6 +160,13 @@ public class UserService {
 
     public byte[] getPhoto(String userId) {
         return this.userRepository.findById(userId).get().getPhoto();
+    }
+
+    // Retorna a lista de artigos favoritados de um usuário
+    public List<Article> getFavoritesList(String userId) {
+        User user = this.getUserById(userId);
+        return user.getArticles();
+
     }
 
 }

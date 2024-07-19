@@ -36,7 +36,8 @@ public class UserController {
             List<UserSimpleDTO> users = this.userService.getAll();
             return ResponseEntity.ok(users);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuários: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuários: " + e.getMessage());
         }
     }
 
@@ -50,7 +51,8 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuário por ID: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuário por ID: " + e.getMessage());
         }
     }
 
@@ -64,7 +66,8 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuário por Email: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuário por Email: " + e.getMessage());
         }
     }
 
@@ -74,7 +77,8 @@ public class UserController {
             this.userService.updateUser(userId, userPatchDTO);
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao atualizar usuário: " + e.getMessage());
         }
     }
 
@@ -84,27 +88,32 @@ public class UserController {
             this.userService.changeLogin(userId, newLogin);
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar login: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao alterar login: " + e.getMessage());
         }
     }
 
     @PatchMapping("/{userId}/change-password")
-    public ResponseEntity<?> changePassword(@PathVariable String userId, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+    public ResponseEntity<?> changePassword(@PathVariable String userId,
+            @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         try {
-            this.userService.changePassword(userId, changePasswordDTO.currentPassword(), changePasswordDTO.newPassword());
+            this.userService.changePassword(userId, changePasswordDTO.currentPassword(),
+                    changePasswordDTO.newPassword());
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar senha: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao alterar senha: " + e.getMessage());
         }
     }
 
     @PostMapping("/{userId}/photo")
     public ResponseEntity<?> changePhoto(@PathVariable String userId, @RequestBody UserPhotoDTO changePhotoUserDTO) {
         try {
-            Optional<UserPhotoDTO> userPhotoDTO= this.userService.changePhoto(userId, changePhotoUserDTO.photo());
+            Optional<UserPhotoDTO> userPhotoDTO = this.userService.changePhoto(userId, changePhotoUserDTO.photo());
             return ResponseEntity.ok().body(userPhotoDTO);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar a foto do usuário." + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao atualizar a foto do usuário." + e);
         }
     }
 
@@ -114,11 +123,13 @@ public class UserController {
             this.userService.deleteUserById(userId);
             return ResponseEntity.noContent().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao excluir usuário: " + e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
         }
     }
+
     @GetMapping("/{userId}/photo")
     public ResponseEntity<byte[]> getPhoto(@PathVariable String userId) {
         byte[] photo = this.userService.getPhoto(userId);
@@ -129,19 +140,28 @@ public class UserController {
         }
     }
 
-     // Curtir Artigo
-    @PutMapping("{userId}/{idArticle}/like")
-    public ResponseEntity<?> likeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+    // Retorna a lista de artigos favoritados de um usuário
+    @GetMapping("{userId}/favoritesListOfUser")
+    public ResponseEntity<?> favoritesList(@PathVariable String userId) {
         try {
-            
-            articleService.likeArticle(idArticle,userId);
-            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
+
+            userService.getFavoritesList(userId);
+            return ResponseEntity.ok(new String[] { "List of favorites getted successfully!" });
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
+    // Curtir Artigo
+    @PutMapping("{userId}/{idArticle}/like")
+    public ResponseEntity<?> likeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+        try {
 
-
+            articleService.likeArticle(idArticle, userId);
+            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }

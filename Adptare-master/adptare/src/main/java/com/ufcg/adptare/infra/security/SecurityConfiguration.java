@@ -44,7 +44,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/api/articles/{idArticle}").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/articles/{idArticle}/like").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/users/{userId}/{idArticle}").authenticated()
-                        .requestMatchers(HttpMethod.PUT,"/users/{userId}/{idArticle}/like").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/users/{userId}/{idArticle}/like").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users/{userId}/favoritesListOfUser").permitAll()
                         // novos metodos
 
                         .requestMatchers(HttpMethod.GET, "/api/articles/search").permitAll()
