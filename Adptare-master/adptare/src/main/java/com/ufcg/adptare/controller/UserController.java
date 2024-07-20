@@ -5,6 +5,7 @@ import com.ufcg.adptare.dto.user.UserPhotoDTO;
 import com.ufcg.adptare.dto.user.UserPatchDTO;
 import com.ufcg.adptare.dto.user.UserSimpleDTO;
 import com.ufcg.adptare.exception.UserException;
+import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.model.User;
 import com.ufcg.adptare.service.ArticleService;
 import com.ufcg.adptare.service.UserService;
@@ -142,14 +143,8 @@ public class UserController {
 
     // Retorna a lista de artigos favoritados de um usuário
     @GetMapping("{userId}/favoritesListOfUser")
-    public ResponseEntity<?> favoritesList(@PathVariable String userId) {
-        try {
-
-            userService.getFavoritesList(userId);
-            return ResponseEntity.ok(new String[] { "List of favorites getted successfully!" });
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    public List<Article> favoritesList(@PathVariable String userId) {
+        return userService.getFavoritesList(userId);
     }
 
     // Curtir Artigo
