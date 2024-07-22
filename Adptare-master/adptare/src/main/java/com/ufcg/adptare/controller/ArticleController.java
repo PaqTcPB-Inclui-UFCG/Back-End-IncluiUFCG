@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -53,6 +54,12 @@ public class ArticleController {
         return ResponseEntity.ok(attachments);
     }
 
+    @GetMapping("/{idArticle}/getFavorites")
+    public int getFavoritesOfArticle(@PathVariable String idArticle) {
+        return articleService.getFavorites(idArticle);
+
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable String id, @RequestBody ArticleDTO articleDTO) {
         Article updatedArticle = articleService.updateArticle(id, articleDTO);
@@ -71,7 +78,5 @@ public class ArticleController {
         Set<String> uniqueTags = articleService.getAllUniqueTags();
         return ResponseEntity.ok(uniqueTags);
     }
-
-   
 
 }

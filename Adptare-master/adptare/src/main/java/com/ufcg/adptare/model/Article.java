@@ -29,7 +29,7 @@ public class Article {
 
     // Quantidade de "likes" no artigo
     @Column(name = "favorites")
-    private Integer favorites = 0;
+    private Integer favorites;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "article", fetch = FetchType.EAGER)
     private List<Attachment> attachments = new ArrayList<>();

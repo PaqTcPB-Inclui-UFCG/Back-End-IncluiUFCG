@@ -89,6 +89,17 @@ public class ArticleService {
 
     }
 
+    // retorna a quantidade total de um artigo
+    public int getFavorites(String idArticle) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            return article.getFavorites();
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
+        }
+    }
+
     // curtir um artigo
     public void likeArticle(String idArticle, String idUser) {
         Optional<Article> optionalArticle = articleRepository.findById(idArticle);
