@@ -80,9 +80,17 @@ public class User implements UserDetails {
 
     // favorita um artigo
     public void favoriteArticle(Article article) {
-        if(!articles.contains(article)){
+        if (!articles.contains(article)) {
             articles.add(article);
             article.setFavorites(article.getFavorites() + 1);
+        }
+    }
+
+    // remove favorito de um artigo
+    public void removeFavoriteArticle(Article article) {
+        if (articles.contains(article)) {
+            articles.remove(article);
+            article.setFavorites(article.getFavorites() - 1);
         }
     }
 }

@@ -103,6 +103,20 @@ public class ArticleService {
 
     }
 
+    // descurtir um artigo
+    public void dislikeArticle(String idArticle, String idUser) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null) {
+            Article article = optionalArticle.get();
+            User user = userService.getUserById(idUser);
+            user.removeFavoriteArticle(article);
+            articleRepository.save(article);
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
+        }
+
+    }
+
     public void deleteArticle(String id) {
         articleRepository.deleteById(id);
     }

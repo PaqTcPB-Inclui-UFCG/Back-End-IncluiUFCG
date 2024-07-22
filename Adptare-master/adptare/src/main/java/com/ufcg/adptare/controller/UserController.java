@@ -159,4 +159,16 @@ public class UserController {
         }
     }
 
+    // Retirar a curtida de um Artigo
+    @PutMapping("{userId}/{idArticle}/dislike")
+    public ResponseEntity<?> dislikeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+        try {
+
+            articleService.dislikeArticle(idArticle, userId);
+            return ResponseEntity.ok(new String[] { "Article disliked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }
