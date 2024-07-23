@@ -1,5 +1,6 @@
 package com.ufcg.adptare.controller;
 
+import com.ufcg.adptare.dto.article.ArticleSimpleDTO;
 import com.ufcg.adptare.dto.user.ChangePasswordDTO;
 import com.ufcg.adptare.dto.user.UserPhotoDTO;
 import com.ufcg.adptare.dto.user.UserPatchDTO;
@@ -143,7 +144,7 @@ public class UserController {
 
     // Retorna a lista de artigos favoritados de um usuário
     @GetMapping("{userId}/favoritesListOfUser")
-    public List<Article> favoritesList(@PathVariable String userId) {
+    public List<ArticleSimpleDTO> favoritesList(@PathVariable String userId) {
         return userService.getFavoritesList(userId);
     }
 

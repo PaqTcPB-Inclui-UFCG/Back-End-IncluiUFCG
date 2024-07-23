@@ -119,9 +119,12 @@ public class ArticleService {
         Optional<Article> optionalArticle = articleRepository.findById(idArticle);
         if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null) {
             Article article = optionalArticle.get();
-            User user = userService.getUserById(idUser);
-            user.removeFavoriteArticle(article);
-            articleRepository.save(article);
+            if (article.getFavorites() > 0) {
+                User user = userService.getUserById(idUser);
+                user.removeFavoriteArticle(article);
+                articleRepository.save(article);
+            }
+
         } else {
             throw new EntityNotFoundException("Article not found with id " + idArticle);
         }

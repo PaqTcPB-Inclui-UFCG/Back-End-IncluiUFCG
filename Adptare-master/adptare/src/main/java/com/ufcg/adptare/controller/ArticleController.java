@@ -54,6 +54,7 @@ public class ArticleController {
         return ResponseEntity.ok(attachments);
     }
 
+    // Retorna o total de likes de um artigo
     @GetMapping("/{idArticle}/getFavorites")
     public int getFavoritesOfArticle(@PathVariable String idArticle) {
         return articleService.getFavorites(idArticle);

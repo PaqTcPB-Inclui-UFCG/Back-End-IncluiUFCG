@@ -1,10 +1,15 @@
 package com.ufcg.adptare.service;
 
+import com.ufcg.adptare.dto.article.ArticleDTO;
+import com.ufcg.adptare.dto.article.ArticleSimpleDTO;
+import com.ufcg.adptare.dto.attachment.AttachmentSimpleDTO;
 import com.ufcg.adptare.dto.user.UserPatchDTO;
 import com.ufcg.adptare.dto.user.UserPhotoDTO;
 import com.ufcg.adptare.dto.user.UserSimpleDTO;
 import com.ufcg.adptare.exception.UserException;
 import com.ufcg.adptare.model.Article;
+import com.ufcg.adptare.model.Attachment;
+import com.ufcg.adptare.model.Tag;
 import com.ufcg.adptare.model.User;
 import com.ufcg.adptare.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -163,10 +169,35 @@ public class UserService {
     }
 
     // Retorna a lista de artigos favoritados de um usuário
-    public List<Article> getFavoritesList(String userId) {
+    public List<ArticleSimpleDTO> getFavoritesList(String userId) {
         User user = this.getUserById(userId);
-        return user.getArticles();
+        List<Article> articles = user.getArticles();
+        List<ArticleSimpleDTO> newArticles = new ArrayList<ArticleSimpleDTO>();
 
+        for (Article a : articles) {
+            newArticles.add(this.convertToArticleDTO(a));
+        }
+
+        return newArticles;
+
+    }
+
+    // Metodo de articleService
+    private ArticleSimpleDTO convertToArticleDTO(Article article) {
+        String tagsAsString = article.getTags().stream()
+                .map(Tag::getName)
+                .collect(Collectors.joining(", "));
+        return new ArticleSimpleDTO(
+                article.getTitle(),
+                article.getContent(),
+                article.getAutor().getId(),
+                List.of(tagsAsString.split(",")),
+                article.getImage(),
+                article.getImageDescription(),
+                article.getCreatedDate(),
+                article.getId()
+
+        );
     }
 
 }
