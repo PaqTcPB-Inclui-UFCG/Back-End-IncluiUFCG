@@ -3,13 +3,18 @@ package com.ufcg.adptare.controller;
 import com.ufcg.adptare.dto.article.ArticleSimpleDTO;
 import com.ufcg.adptare.dto.attachment.AttachmentSimpleDTO;
 import com.ufcg.adptare.service.ArticleService;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.dto.article.ArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -47,6 +52,13 @@ public class ArticleController {
     public ResponseEntity<List<AttachmentSimpleDTO>> getAllAttachmentsByArticleId(@PathVariable String idArticle) {
         List<AttachmentSimpleDTO> attachments = articleService.getAllAttachmentsByArticleId(idArticle);
         return ResponseEntity.ok(attachments);
+    }
+
+    // Retorna o total de likes de um artigo
+    @GetMapping("/{idArticle}/getFavorites")
+    public int getFavoritesOfArticle(@PathVariable String idArticle) {
+        return articleService.getFavorites(idArticle);
+
     }
 
     @PutMapping("/{id}")

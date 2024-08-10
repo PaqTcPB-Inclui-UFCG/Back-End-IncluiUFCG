@@ -7,7 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Table(name = "users")
@@ -29,6 +30,10 @@ public class User implements UserDetails {
     private String fullName;
     private byte[] photo;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "favorites_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "article_id"))
+    private List<Article> articles;
+
     public User(String login, String encryptePassword, UserRole userRole, String firstName, String lastName) {
         this.login = login;
         this.role = userRole;
@@ -36,14 +41,16 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = firstName + " " + lastName;
+        this.articles = new ArrayList<>();
 
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("NEW_USER"));
-        else return List.of(new SimpleGrantedAuthority("NEW_USER"));
+        if (this.role == UserRole.ADMIN)
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("NEW_USER"));
+        else
+            return List.of(new SimpleGrantedAuthority("NEW_USER"));
     }
 
     @Override
@@ -69,5 +76,21 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    // favorita um artigo
+    public void favoriteArticle(Article article) {
+        if (!articles.contains(article)) {
+            articles.add(article);
+            article.setFavorites(article.getFavorites() + 1);
+        }
+    }
+
+    // remove favorito de um artigo
+    public void removeFavoriteArticle(Article article) {
+        if (articles.contains(article)) {
+            articles.remove(article);
+            article.setFavorites(article.getFavorites() - 1);
+        }
     }
 }

@@ -1,12 +1,17 @@
 package com.ufcg.adptare.controller;
 
+import com.ufcg.adptare.dto.article.ArticleSimpleDTO;
 import com.ufcg.adptare.dto.user.ChangePasswordDTO;
 import com.ufcg.adptare.dto.user.UserPhotoDTO;
 import com.ufcg.adptare.dto.user.UserPatchDTO;
 import com.ufcg.adptare.dto.user.UserSimpleDTO;
 import com.ufcg.adptare.exception.UserException;
+import com.ufcg.adptare.model.Article;
 import com.ufcg.adptare.model.User;
+import com.ufcg.adptare.service.ArticleService;
 import com.ufcg.adptare.service.UserService;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,13 +29,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ArticleService articleService;
+
     @GetMapping
     public ResponseEntity<?> getAllUsers() {
         try {
             List<UserSimpleDTO> users = this.userService.getAll();
             return ResponseEntity.ok(users);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuários: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuários: " + e.getMessage());
         }
     }
 
@@ -44,7 +53,8 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuário por ID: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuário por ID: " + e.getMessage());
         }
     }
 
@@ -58,7 +68,8 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao obter usuário por Email: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao obter usuário por Email: " + e.getMessage());
         }
     }
 
@@ -68,7 +79,8 @@ public class UserController {
             this.userService.updateUser(userId, userPatchDTO);
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao atualizar usuário: " + e.getMessage());
         }
     }
 
@@ -78,27 +90,32 @@ public class UserController {
             this.userService.changeLogin(userId, newLogin);
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar login: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao alterar login: " + e.getMessage());
         }
     }
 
     @PatchMapping("/{userId}/change-password")
-    public ResponseEntity<?> changePassword(@PathVariable String userId, @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
+    public ResponseEntity<?> changePassword(@PathVariable String userId,
+            @RequestBody @Valid ChangePasswordDTO changePasswordDTO) {
         try {
-            this.userService.changePassword(userId, changePasswordDTO.currentPassword(), changePasswordDTO.newPassword());
+            this.userService.changePassword(userId, changePasswordDTO.currentPassword(),
+                    changePasswordDTO.newPassword());
             return ResponseEntity.ok().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao alterar senha: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao alterar senha: " + e.getMessage());
         }
     }
 
     @PostMapping("/{userId}/photo")
     public ResponseEntity<?> changePhoto(@PathVariable String userId, @RequestBody UserPhotoDTO changePhotoUserDTO) {
         try {
-            Optional<UserPhotoDTO> userPhotoDTO= this.userService.changePhoto(userId, changePhotoUserDTO.photo());
+            Optional<UserPhotoDTO> userPhotoDTO = this.userService.changePhoto(userId, changePhotoUserDTO.photo());
             return ResponseEntity.ok().body(userPhotoDTO);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar a foto do usuário." + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao atualizar a foto do usuário." + e);
         }
     }
 
@@ -108,11 +125,13 @@ public class UserController {
             this.userService.deleteUserById(userId);
             return ResponseEntity.noContent().build();
         } catch (UserException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao excluir usuário: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao excluir usuário: " + e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor");
         }
     }
+
     @GetMapping("/{userId}/photo")
     public ResponseEntity<byte[]> getPhoto(@PathVariable String userId) {
         byte[] photo = this.userService.getPhoto(userId);
@@ -123,7 +142,34 @@ public class UserController {
         }
     }
 
+    // Retorna a lista de artigos favoritados de um usuário
+    @GetMapping("{userId}/favoritesListOfUser")
+    public List<ArticleSimpleDTO> favoritesList(@PathVariable String userId) {
+        return userService.getFavoritesList(userId);
+    }
 
+    // Curtir Artigo
+    @PutMapping("{userId}/{idArticle}/like")
+    public ResponseEntity<?> likeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+        try {
 
+            articleService.likeArticle(idArticle, userId);
+            return ResponseEntity.ok(new String[] { "Article liked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    // Retirar a curtida de um Artigo
+    @PutMapping("{userId}/{idArticle}/dislike")
+    public ResponseEntity<?> dislikeArticle(@PathVariable String idArticle, @PathVariable String userId) {
+        try {
+
+            articleService.dislikeArticle(idArticle, userId);
+            return ResponseEntity.ok(new String[] { "Article disliked successfully!" });
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }

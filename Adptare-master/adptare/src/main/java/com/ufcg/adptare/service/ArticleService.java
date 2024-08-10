@@ -10,6 +10,8 @@ import com.ufcg.adptare.model.Tag;
 import com.ufcg.adptare.repository.ArticleRepository;
 import com.ufcg.adptare.repository.TagRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +39,7 @@ public class ArticleService {
                 .map(this::convertToArticleDTO)
                 .collect(Collectors.toList());
     }
+
     public Optional<ArticleSimpleDTO> getArticleDTOById(String id) {
         return articleRepository.findById(id)
                 .map(this::convertToArticleDTO);
@@ -55,6 +58,7 @@ public class ArticleService {
                 article.getImageDescription(),
                 article.getCreatedDate(),
                 article.getId()
+
         );
     }
 
@@ -68,6 +72,7 @@ public class ArticleService {
             throw new RuntimeException("Autor não encontrado com ID: " + articleDTO.autorId());
         }
         Article article = new Article();
+        article.setFavorites(0);
         article.setTitle(articleDTO.titulo());
         article.setAutor(autor);
         article.setImage(articleDTO.file());
@@ -81,6 +86,48 @@ public class ArticleService {
         article.setTags(tags);
 
         return articleRepository.save(article);
+
+    }
+
+    // retorna a quantidade total de um artigo
+    public int getFavorites(String idArticle) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            return article.getFavorites();
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
+        }
+    }
+
+    // curtir um artigo
+    public void likeArticle(String idArticle, String idUser) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null) {
+            Article article = optionalArticle.get();
+            User user = userService.getUserById(idUser);
+            user.favoriteArticle(article);
+            articleRepository.save(article);
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
+        }
+
+    }
+
+    // descurtir um artigo
+    public void dislikeArticle(String idArticle, String idUser) {
+        Optional<Article> optionalArticle = articleRepository.findById(idArticle);
+        if (optionalArticle.isPresent() && (userService.getUserById(idUser)) != null) {
+            Article article = optionalArticle.get();
+            if (article.getFavorites() > 0) {
+                User user = userService.getUserById(idUser);
+                user.removeFavoriteArticle(article);
+                articleRepository.save(article);
+            }
+
+        } else {
+            throw new EntityNotFoundException("Article not found with id " + idArticle);
+        }
 
     }
 
@@ -103,8 +150,7 @@ public class ArticleService {
                 attachment.getId(),
                 attachment.getNameFile(),
                 attachment.getTypeFile(),
-                attachment.getContent()
-        );
+                attachment.getContent());
     }
 
     public Article updateArticle(String articleId, ArticleDTO articleDTO) {
