@@ -1,10 +1,21 @@
 #Use a imagem oficial do Amazon Corretto 17 como a imagem base
-FROM amazoncorretto:17-alpine
+FROM ubuntu:latest AS build
+
+RUN apt-get update
+RUN apt-get install openjdk-17-jdk -y
+COPY . .
+
+RUN apt-get install maven -y
+RUN mvn clean install 
 
 # Defina o diretório de trabalho no contêiner
 WORKDIR /app
 
-COPY target/*.jar /app/adptare.jar
+FROM openjdk:17-jdk-slim
+
+EXPOSE 8080
+
+COPY --from=build target/*.jar /app/adptare.jar
 
 # Comando para executar a aplicação quando o contêiner iniciar
 CMD ["java", "-jar", "/app/adptare.jar"]

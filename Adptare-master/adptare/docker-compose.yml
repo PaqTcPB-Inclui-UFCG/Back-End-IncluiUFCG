@@ -1,14 +1,29 @@
-version: '3.8'
-
 services:
   back-adaptare:
     build: .
     ports:
       - "8081:8081"
     environment:
+      - DB_HOST=${DATABASE_URL}
+      - DB_PORT=5432
+      - DB_NAME=${DATABASE_NAME}
+      - DB_USER=${DATABASE_USERNAME}
+      - DB_PASSWORD=${DATABASE_PASSWORD}
       - JWT_SECRET=ultra-secret-k3Y
     networks:
-      - adptare
+      - adaptare
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - "5432:5432"
+    networks:
+      - adaptare
+
 networks:
-  adptare:
+  adaptare:
     external: true
