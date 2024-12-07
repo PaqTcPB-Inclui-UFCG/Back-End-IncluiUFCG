@@ -13,7 +13,6 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:8081");
         config.addAllowedOrigin("https://front-end-inclui-ufcg.vercel.app/");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");

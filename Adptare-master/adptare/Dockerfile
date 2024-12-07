@@ -15,7 +15,7 @@ FROM openjdk:17-jdk-slim
 
 EXPOSE 8080
 
-COPY --from=build target/*.jar /app/adptare.jar
+COPY --from=build /target/adptare-0.0.1-SNAPSHOT.jar adptare.jar
 
 # Comando para executar a aplicação quando o contêiner iniciar
-CMD ["java", "-jar", "/app/adptare.jar"]
+CMD ["java", "-jar", "adptare.jar"]
